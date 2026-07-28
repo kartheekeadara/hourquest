@@ -38,8 +38,21 @@ const cards = [
   },
 ];
 
-function partnershipMailto(subject: string, adminEmail: string) {
-  return `mailto:${adminEmail}?subject=${encodeURIComponent(subject)}`;
+function partnershipMailto(subject: string, email: string) {
+  return `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+}
+
+function getPartnershipContactHref(subject: string, adminEmail: string): string {
+  if (adminEmail) {
+    return partnershipMailto(subject, adminEmail);
+  }
+
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
+  if (contactEmail) {
+    return partnershipMailto(subject, contactEmail);
+  }
+
+  return "/faq";
 }
 
 async function loadApprovedPartners(): Promise<
@@ -86,13 +99,8 @@ export default async function PartnershipPage() {
                   </Button>
                 )}
                 <Button
-                  href={
-                    adminEmail
-                      ? partnershipMailto(card.subject, adminEmail)
-                      : undefined
-                  }
+                  href={getPartnershipContactHref(card.subject, adminEmail)}
                   variant={card.title === "For Organizations" ? "secondary" : "primary"}
-                  disabled={!adminEmail}
                 >
                   {card.cta}
                 </Button>

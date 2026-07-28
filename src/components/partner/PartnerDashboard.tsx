@@ -178,23 +178,33 @@ export function PartnerDashboard({
   }
 
   async function toggleChallenge(challenge: Challenge) {
-    await fetch("/api/partner/challenges", {
+    const res = await fetch("/api/partner/challenges", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         payload: { id: challenge.id, active: !challenge.active },
       }),
     });
+    if (!res.ok) {
+      const body = (await res.json().catch(() => null)) as { error?: string } | null;
+      alert(body?.error ?? "Failed to update challenge.");
+      return;
+    }
     await loadChallenges();
   }
 
   async function deleteChallenge(id: string) {
     if (!confirm("Permanently delete this challenge?")) return;
-    await fetch("/api/partner/challenges/delete", {
+    const res = await fetch("/api/partner/challenges/delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ challengeId: id }),
     });
+    if (!res.ok) {
+      const body = (await res.json().catch(() => null)) as { error?: string } | null;
+      alert(body?.error ?? "Failed to delete challenge.");
+      return;
+    }
     await loadChallenges();
   }
 
@@ -205,7 +215,7 @@ export function PartnerDashboard({
     const oldIndex = items.findIndex((c) => c.id === active.id);
     const newIndex = items.findIndex((c) => c.id === over.id);
     const reordered = arrayMove(items, oldIndex, newIndex);
-    await fetch("/api/partner/challenges/reorder", {
+    const res = await fetch("/api/partner/challenges/reorder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -213,6 +223,11 @@ export function PartnerDashboard({
         orderedIds: reordered.map((c) => c.id),
       }),
     });
+    if (!res.ok) {
+      const body = (await res.json().catch(() => null)) as { error?: string } | null;
+      alert(body?.error ?? "Failed to reorder challenges.");
+      return;
+    }
     await loadChallenges();
   }
 

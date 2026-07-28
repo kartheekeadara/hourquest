@@ -17,6 +17,10 @@ export async function GET(request: Request) {
         } = await supabase.auth.getUser();
 
         if (user) {
+          if (next === "/auth/update-password") {
+            redirect(next);
+          }
+
           const { data: profile } = await supabase
             .from("profiles")
             .select("user_type, partner_org_id")

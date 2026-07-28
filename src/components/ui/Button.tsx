@@ -44,6 +44,10 @@ const darkBgVariants = new Set<Variant>([
   "ghostOnDark",
 ]);
 
+function isExternalHref(href: string): boolean {
+  return /^(mailto:|tel:|https?:\/\/)/i.test(href);
+}
+
 export function Button({
   variant = "primary",
   size = "md",
@@ -63,6 +67,19 @@ export function Button({
   );
 
   if (href) {
+    if (isExternalHref(href)) {
+      const isHttp = /^https?:\/\//i.test(href);
+      return (
+        <a
+          href={href}
+          className={classes}
+          {...(isHttp ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link href={href} className={classes}>
         {children}

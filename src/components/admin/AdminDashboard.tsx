@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -112,13 +112,26 @@ async function uploadPartnerLogo(
   file: File,
 ): Promise<string> {
   const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-  const path = `${orgId}/logo.${ext}`;
+  const path = `${orgId}/logo-${Date.now()}.${ext}`;
+
+  const { data: existing } = await supabase.storage
+    .from(PARTNER_LOGOS_BUCKET)
+    .list(orgId);
+  if (existing?.length) {
+    const stalePaths = existing
+      .filter((item) => item.name.startsWith("logo"))
+      .map((item) => `${orgId}/${item.name}`);
+    if (stalePaths.length > 0) {
+      await supabase.storage.from(PARTNER_LOGOS_BUCKET).remove(stalePaths);
+    }
+  }
+
   const { error } = await supabase.storage
     .from(PARTNER_LOGOS_BUCKET)
     .upload(path, file, { upsert: true, contentType: file.type });
   if (error) throw new Error(error.message);
   const { data } = supabase.storage.from(PARTNER_LOGOS_BUCKET).getPublicUrl(path);
-  return data.publicUrl;
+  return `${data.publicUrl}?v=${Date.now()}`;
 }
 
 function PartnerLogoField({
@@ -132,6 +145,7 @@ function PartnerLogoField({
   onFileChange: (file: File | null) => void;
   onClear: () => void;
 }) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const preview = logoPreview ?? logoUrl;
 
   return (
@@ -156,10 +170,14 @@ function PartnerLogoField({
               {preview ? "Change logo" : "Upload logo"}
             </span>
             <input
+              ref={fileInputRef}
               type="file"
               accept="image/jpeg,image/png,image/webp,image/svg+xml"
               className="sr-only"
-              onChange={(e) => onFileChange(e.target.files?.[0] ?? null)}
+              onChange={(e) => {
+                onFileChange(e.target.files?.[0] ?? null);
+                e.target.value = "";
+              }}
             />
           </label>
           {(preview || logoPreview) && (
@@ -167,7 +185,12 @@ function PartnerLogoField({
               type="button"
               variant="secondary"
               className="px-3 py-1 text-[12px]"
-              onClick={onClear}
+              onClick={() => {
+                onClear();
+                if (fileInputRef.current) {
+                  fileInputRef.current.value = "";
+                }
+              }}
             >
               Remove logo
             </Button>

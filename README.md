@@ -19,7 +19,20 @@ Next.js web app for [challenges.terraserve.org](https://challenges.terraserve.or
 4. **Sync admin emails:** every address in `ADMIN_EMAILS` must exist in `challenge_admins` (see [`supabase/scripts/sync-challenge-admins.sql`](supabase/scripts/sync-challenge-admins.sql)). Without this, `/admin` loads but RPC actions fail with Forbidden.
 5. If partners signed up before the partner migration, run [`supabase/scripts/backfill-broken-partner-profiles.sql`](supabase/scripts/backfill-broken-partner-profiles.sql).
 6. Full SQL audit (optional): run [`supabase/scripts/diagnose-deployment.sql`](supabase/scripts/diagnose-deployment.sql) in the Supabase SQL Editor.
-7. Configure Supabase Auth email templates for password reset (Auth → Email).
+7. Configure Supabase Auth for password reset and signup emails (see **Auth email** below).
+
+### Auth email (password reset & verification)
+
+Password reset and signup confirmation emails are sent by **Supabase Auth**, not Resend. App transactional mail (submission approved, partner approved, etc.) uses Resend separately.
+
+1. **Supabase Dashboard → Authentication → URL configuration**
+   - **Site URL:** `https://challenges.terraserve.org` (or your staging URL)
+   - **Redirect URLs:** include `https://challenges.terraserve.org/auth/callback` and `http://localhost:3000/auth/callback`
+2. **Authentication → Email**
+   - Enable custom SMTP (recommended for production) or verify Supabase’s default sender is delivering to your inbox (check spam).
+   - Customize the **Reset password** template if needed; the link must use the project’s redirect allow-list.
+3. **Local dev:** `supabase/config.toml` has SMTP commented out and `enable_confirmations = false` — reset emails in local dev require enabling SMTP or testing against the hosted project.
+4. After reset, users land on `/auth/update-password` to set a new password, then are routed to `/dashboard` or `/partner` by account type.
 
 ### Deployment checklist (existing production DB)
 

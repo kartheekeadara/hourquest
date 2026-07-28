@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { PartnerSignOut } from "@/components/partner/PartnerSignOut";
 import { getPartnerSession } from "@/lib/partner";
 
 export default async function PartnerLayout({
@@ -25,9 +26,12 @@ export default async function PartnerLayout({
             <span className="text-white/30">|</span>
             <span className="text-base font-medium">Partner Portal</span>
           </div>
-          <span className="max-w-[12rem] truncate text-xs text-white/70 sm:max-w-none">
-            {session.org.name}
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="max-w-[12rem] truncate text-xs text-white/70 sm:max-w-none">
+              {session.org.name}
+            </span>
+            <PartnerSignOut />
+          </div>
         </div>
       </header>
       {children}
