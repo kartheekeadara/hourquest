@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/Button";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "Download TerraServe — HourQuest",
+  title: "Download the HourQuest iOS App",
   description:
-    "Download the TerraServe iOS app to discover local volunteer events, check in with GPS, and track verified service hours alongside HourQuest web challenges.",
+    "Download the HourQuest iOS app to discover local volunteer events, check in with GPS, and track verified service hours.",
   path: "/download",
 });
 
@@ -30,7 +30,7 @@ const features = [
   {
     title: "Shared verified hours",
     description:
-      "Service tracked in the TerraServe app rolls into the same milestone certificates you earn on HourQuest.",
+      "Service tracked in the HourQuest app rolls into the same milestone certificates you earn on the web.",
   },
 ];
 
@@ -39,21 +39,21 @@ export default function DownloadPage() {
     <PublicShell>
       <PageHero
         eyebrow="Mobile app"
-        title="Download TerraServe"
-        subtitle="The TerraServe iOS app for local volunteer events, GPS check-in, and verified service hours — alongside HourQuest web challenges."
+        title="Download HourQuest"
+        subtitle="The HourQuest iOS app for local volunteer events, GPS check-in, and verified service hours."
       />
       <section className="section-y bg-page">
         <div className="section-container max-w-4xl space-y-8">
           <Card className="site-surface-primary flex flex-col gap-6 border-0 p-8 md:flex-row md:items-center">
             <div className="flex-1">
               <h2 className="text-xl font-semibold text-white md:text-2xl">
-                TerraServe for iOS
+                HourQuest for iOS
               </h2>
               <p className="text-muted-on-primary mt-3 text-sm leading-relaxed">
-                The TerraServe app connects students with hyperlocal volunteer
+                The HourQuest app connects students with hyperlocal volunteer
                 organizations, event listings, and GPS check-in. Hours logged
-                through the TerraServe app count toward the same verified certificates
-                you earn on HourQuest.
+                in the app count toward the same verified certificates
+                you earn on the web.
               </p>
               <div className="mt-6">
                 <Button href="#" variant="outlineWhite">
@@ -62,11 +62,11 @@ export default function DownloadPage() {
               </div>
             </div>
             <Image
-              src="/images/terraserve-app-logo.png"
-              alt="TerraServe app icon"
+              src="/images/hourquest-app-icon.png"
+              alt="HourQuest app icon"
               width={176}
               height={176}
-              className="mx-auto shrink-0 rounded-[26px] shadow-card-hover"
+              className="mx-auto h-44 w-44 shrink-0 drop-shadow-[0_10px_30px_rgba(15,23,42,0.18)]"
             />
           </Card>
           <div className="grid gap-4 sm:grid-cols-2">

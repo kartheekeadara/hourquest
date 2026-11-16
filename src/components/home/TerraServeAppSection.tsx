@@ -8,29 +8,28 @@ export function TerraServeAppSection() {
       <div className="section-container">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <Image
-            src="/images/terraserve-app-logo.png"
-            alt="TerraServe app icon"
+            src="/images/hourquest-app-icon.png"
+            alt="HourQuest app icon"
             width={88}
             height={88}
-            className="mb-6 rounded-[22px] shadow-card"
+            className="mb-6 h-[88px] w-[88px] drop-shadow-[0_8px_24px_rgba(15,23,42,0.12)]"
           />
           <SectionHeader
             align="center"
-            title="TerraServe for iOS"
-            subtitle="The TerraServe mobile app helps you discover local volunteer events, check in with GPS, and track service in your community — alongside the challenges you complete on HourQuest."
+            title="HourQuest for iOS"
+            subtitle="The HourQuest app helps you discover local volunteer events, check in with GPS, and track service in your community — alongside the challenges you complete on the web."
           />
           <p id="terraserve-app-heading" className="sr-only">
-            TerraServe for iOS
+            HourQuest for iOS
           </p>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
-            Hours logged through the TerraServe app count toward the same verified certificates
-            you earn here. Use HourQuest for photo-based environmental and medical
-            challenges on the web; use the TerraServe app when you want hyperlocal org listings and
-            event check-ins on your phone.
+            Hours logged in the HourQuest app count toward the same verified certificates
+            you earn here. Use the site for photo-based environmental and medical
+            challenges; use the HourQuest app for local events and check-ins on your phone.
           </p>
           <div className="mt-8">
             <Button href="/download" variant="primary" size="lg">
-              Download TerraServe
+              Download HourQuest
             </Button>
           </div>
         </div>

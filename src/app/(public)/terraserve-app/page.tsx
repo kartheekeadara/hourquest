@@ -4,9 +4,9 @@ import { Card } from "@/components/ui/Card";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "TerraServe iOS App — HourQuest",
+  title: "HourQuest iOS App",
   description:
-    "Learn about the TerraServe iOS app for local volunteer events and GPS check-in alongside HourQuest web challenges.",
+    "Learn about the HourQuest iOS app for local volunteer events and GPS check-in.",
   path: "/terraserve-app",
 });
 
@@ -24,12 +24,12 @@ const highlights = [
   {
     title: "Shared verified hours",
     description:
-      "Service tracked in the TerraServe app rolls into the same milestone certificates you earn on HourQuest.",
+      "Service tracked in the HourQuest app rolls into the same milestone certificates you earn on the web.",
   },
   {
     title: "Works with HourQuest",
     description:
-      "Complete web challenges here; use TerraServe when you want on-the-go local opportunities.",
+      "Complete web challenges here; use the HourQuest app when you want on-the-go local opportunities.",
   },
 ];
 
@@ -40,21 +40,20 @@ export default function TerraServeAppPage() {
         <div className="section-container max-w-3xl">
           <div className="flex flex-col items-center text-center">
             <Image
-              src="/images/terraserve-app-logo.png"
-              alt="TerraServe app icon"
+              src="/images/hourquest-app-icon.png"
+              alt="HourQuest app icon"
               width={120}
               height={120}
-              className="rounded-[26px] shadow-card-hover"
+              className="h-[120px] w-[120px] drop-shadow-[0_10px_30px_rgba(15,23,42,0.12)]"
               priority
             />
             <h1 className="font-display mt-8 text-3xl font-semibold tracking-tight text-primary-dark sm:text-4xl">
-              TerraServe for iOS
+              HourQuest for iOS
             </h1>
             <p className="mt-4 text-base leading-relaxed text-text-muted">
-              TerraServe is the iOS app that complements HourQuest. It connects students
-              with hyperlocal volunteer organizations, event listings, and GPS
-              check-in — while HourQuest focuses on verified environmental and
-              medical challenges with photo proof on the web.
+              The HourQuest iOS app connects students with hyperlocal volunteer
+              organizations, event listings, and GPS check-in — alongside the
+              environmental and medical challenges with photo proof on the web.
             </p>
           </div>
 
@@ -76,11 +75,11 @@ export default function TerraServeAppPage() {
               One account, one impact record
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Whether you complete a beach cleanup challenge on HourQuest or check
-              in at a food bank through the TerraServe app, your verified hours build toward
-              the same profile and certificate milestones. The TerraServe app is built for
-              discovery and attendance on iOS; HourQuest is built for structured
-              challenges and proof review in the browser.
+              Whether you complete a beach cleanup on the web or check in at a food
+              bank in the HourQuest app, your verified hours build toward the same
+              profile and certificate milestones. The app is built for discovery and
+              attendance on iOS; the site is built for structured challenges and proof
+              review in the browser.
             </p>
           </Card>
         </div>

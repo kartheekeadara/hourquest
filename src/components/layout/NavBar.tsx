@@ -16,7 +16,7 @@ const publicLinks = [
   { href: "/challenges", label: "Challenges" },
   { href: "/leaderboard", label: "Leaderboard" },
   { href: "/partnership", label: "Partnership" },
-  { href: "/terraserve-app", label: "TerraServe iOS" },
+  { href: "/terraserve-app", label: "HourQuest iOS" },
 ];
 
 const aboutLinks = [
